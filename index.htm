@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Skill Maze</title>
 </head>
+
 <body>
-    <p>Hello World</p>
-    
-</body>
+    <div class="game-intro">
+      <img src="" alt="" class="logo-img" />
+      <br />
+      <button id="start-button">Play Game</button>
+      <img src="" alt="" class="arrows-img" />
+    </div>
+
+    <div id="game-board">
+      <canvas id="canvas" width="800" height="400" style="border: 10px solid black"></canvas>
+    </div>
+
+    <script type="text/javascript" src="/obstacle.js"></script>
+    <script type="text/javascript" src="/controls.js"></script>
+    <script type="text/javascript" src="/cube.js"></script>
+    <script type="text/javascript" src="/game.js"></script>
+    <script type="text/javascript" src="/index.js"></script>
+  </body>
 </html>
