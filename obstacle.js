@@ -1,28 +1,47 @@
-class Obstacle {
-    constructor(game) {
+class Circle {
+    constructor(game, x, y, radius, color, speed, direction) {
       this.game = game;
-      this.x = Math.floor(Math.random() * 350);
-      this.y = 0;
-      this.width = Math.floor(Math.random() * 250 + 100);
-      this.height = 50;
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.color = color;
+      this.speed = speed;
+      this.direction = direction;
     }
     left() {
-      return this.x;
+      return this.x - this.radius;
     }
     right() {
-      return this.x + this.width;
+      return this.x + this.radius;
     }
   
     top() {
-      return this.y;
+      return this.y - this.radius;
     }
   
     bottom() {
-      return this.y + this.height;
+      return this.y + this.radius;
     }
-  
+
+    circleDir() {
+        if (this.direction === 'up') {
+            this.y -= this.speed;
+            if (this.y - this.radius <= 0){
+                this.direction = 'down';}
+        } else {
+            this.y += this.speed;
+            if (this.y + this.radius >= this.game.canvasHeight){
+                this.direction = 'up';
+        }
+    }
+        }
+
     draw() {
-      this.game.ctx.fillStyle = 'red';
-      this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+      const ctx = this.game.ctx;
+      ctx.fillStyle = this.color
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      ctx.fill()
+      ctx.closePath();
     }
   }
