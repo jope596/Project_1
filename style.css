@@ -1,8 +1,15 @@
 body {
     padding: 0;
     text-align: center;
-    
+    background: url(/imgs/plex-arcade-hero-synth-grid.png)no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
+    
+}
+  
   
   .game-intro {
     float: right;
@@ -26,14 +33,13 @@ body {
     font-size: 30px;
     background-color: #bd6b01;
     color: #fff;
-    padding: 20px 40px;
+    padding: 10px 40px;
     border: 0;
     box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    
   }
   
   #game-board {
-      float: left;
+      float: center;
       padding: 20px 0px;
   }
