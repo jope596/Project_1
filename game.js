@@ -24,7 +24,7 @@ class Game {
         this.circle5 = new Circle(this, 500, 200, 20, 'black', 8, 'up');
         this.circle6 = new Circle(this, 600, 200, 20, 'black', 8, 'down');
         this.circle7 = new Circle(this, 700, 200, 20, 'black', 8, 'up');
-        this.coin = new Circle(this, 400, 10, 5, 'yellow', 0)
+        this.coin = new Circle(this, 400, 180, 5, 'yellow', 0)
         const controls = new Controls(this);
         controls.keyboardEvents();
     
@@ -83,9 +83,9 @@ class Game {
 
     drawBackground() {
         if (this.level === 1) { 
-        this.background.src = "/imgs/background2.png";
+        this.background.src = "docs/assets/imgs/background2.png";
         }else if (this.level === 2) {
-            this.background.src = "/imgs/background3.png";
+            this.background.src = "docs/assets/imgs/background3.png";
         }
         this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
         this.ctx.fillStyle = '#ffbb00';
@@ -114,7 +114,7 @@ class Game {
           this.clear();
           if (this.level = 1){
           this.start();
-          } if (this.level = 2){
+          }else if (this.level = 2){
             this.startLvl2();
           }
         }
