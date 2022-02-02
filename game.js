@@ -12,18 +12,19 @@ class Game {
       this.canvasWidth = 810;
       this.canvasHeight = 420;
       this.intervalId = null;
+      this.level = 1;
     }
 
     start() {
         this.cube = new Component(this, 30, 30, 'red', 0, 180);
-        this.circle1 = new Circle(this, 100, 200, 20, '#bd6b01', 8, 'up');
-        this.circle2 = new Circle(this, 200, 200, 20, '#bd6b01', 8, 'down');
-        this.circle3 = new Circle(this, 300, 200, 20, '#bd6b01', 8, 'up');
-        this.circle4 = new Circle(this, 400, 200, 20, '#bd6b01', 8, 'down');
-        this.circle5 = new Circle(this, 500, 200, 20, '#bd6b01', 8, 'up');
-        this.circle6 = new Circle(this, 600, 200, 20, '#bd6b01', 8, 'down');
-        this.circle7 = new Circle(this, 700, 200, 20, '#bd6b01', 8, 'up');
-        this.coin = new Circle(this, 400, 250, 5, 'yellow', 0)
+        this.circle1 = new Circle(this, 100, 200, 20, 'black', 8, 'up');
+        this.circle2 = new Circle(this, 200, 200, 20, 'black', 8, 'down');
+        this.circle3 = new Circle(this, 300, 200, 20, 'black', 8, 'up');
+        this.circle4 = new Circle(this, 400, 200, 20, 'black', 8, 'down');
+        this.circle5 = new Circle(this, 500, 200, 20, 'black', 8, 'up');
+        this.circle6 = new Circle(this, 600, 200, 20, 'black', 8, 'down');
+        this.circle7 = new Circle(this, 700, 200, 20, 'black', 8, 'up');
+        this.coin = new Circle(this, 400, 10, 5, 'yellow', 0)
         const controls = new Controls(this);
         controls.keyboardEvents();
     
@@ -34,11 +35,27 @@ class Game {
         this.intervalId = setInterval(() => {
           this.update();
         }, 1000 / 60);
-      }
+    }
 
-      
+    startLvl2() {
+        this.cube = new Component(this, 30, 30, 'red', 0, 180);
+        this.circle1 = new Circle(this, 100, 200, 30, 'yellow', 10, 'up');
+        this.circle2 = new Circle(this, 200, 200, 30, 'yellow', 10, 'down');
+        this.circle3 = new Circle(this, 300, 200, 30, 'yellow', 10, 'up');
+        this.circle4 = new Circle(this, 400, 200, 30, 'yellow', 10, 'down');
+        this.circle5 = new Circle(this, 500, 200, 30, 'yellow', 10, 'up');
+        this.circle6 = new Circle(this, 600, 200, 30, 'yellow', 10, 'down');
+        this.circle7 = new Circle(this, 700, 200, 30, 'yellow', 10, 'up');
+        this.coin = new Circle(this, 400, 400, 5, 'black', 0);
+        const controls = new Controls(this);
+        controls.keyboardEvents();
+
+        this.obstacles.push (this.circle1, this.circle2, this.circle3, this.circle4, this.circle5, this.circle6, this.circle7);
+        this.coins.push (this.coin);
+    }
     
 
+      
     update() {
         this.drawBackground();
         this.cube.draw();
@@ -65,9 +82,13 @@ class Game {
       }
 
     drawBackground() {
+        if (this.level === 1) { 
         this.background.src = "/imgs/background2.png";
+        }else if (this.level === 2) {
+            this.background.src = "/imgs/background3.png";
+        }
         this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
-        this.ctx.fillStyle = 'yellow';
+        this.ctx.fillStyle = '#ffbb00';
         this.ctx.fillRect(this.canvasWidth - 20, 0, 20, this.canvasHeight)
         
     }
@@ -88,18 +109,24 @@ class Game {
             
           return cube.crashWith(obstacle);
         });
-        if (crashed) {
-          console.log(this.obstacles)  
+        if (crashed) { 
           this.stop();
           this.clear();
+          if (this.level = 1){
           this.start();
+          } if (this.level = 2){
+            this.startLvl2();
+          }
         }
         
       }
 
       levelPassed() {
           if (this.coin == null && this.cube.right() >= this.canvasWidth - 20) {
-              console.log ('YOU VE PASSED THE LEVEL')
+              this.level = 2;
+              console.log('LEVEL PASSED');
+              console.log (this.level)
+              this.startLvl2();
           }
       }
 
@@ -115,7 +142,7 @@ class Game {
 
       drawScore() {
         let score = this.intervalId;
-        this.ctx.font = '25px serif';
+        this.ctx.font = '25px courier';
         this.ctx.fillStyle = 'black';
         this.ctx.fillText(`Attempt: ${score}`, 2, 20);
       }
