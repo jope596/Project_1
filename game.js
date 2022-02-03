@@ -17,14 +17,14 @@ class Game {
 
     start() {
         this.cube = new Component(this, 30, 30, 'red', 0, 180);
-        this.circle1 = new Circle(this, 100, 200, 20, 'black', 8, 'up');
-        this.circle2 = new Circle(this, 200, 200, 20, 'black', 8, 'down');
-        this.circle3 = new Circle(this, 300, 200, 20, 'black', 8, 'up');
-        this.circle4 = new Circle(this, 400, 200, 20, 'black', 8, 'down');
-        this.circle5 = new Circle(this, 500, 200, 20, 'black', 8, 'up');
-        this.circle6 = new Circle(this, 600, 200, 20, 'black', 8, 'down');
-        this.circle7 = new Circle(this, 700, 200, 20, 'black', 8, 'up');
-        this.coin = new Circle(this, 400, 180, 5, 'yellow', 0)
+        this.circle1 = new Circle(this, 100, 200, 20, 'black', 7, 'up');
+        this.circle2 = new Circle(this, 200, 200, 20, 'black', 7, 'down');
+        this.circle3 = new Circle(this, 300, 200, 20, 'black', 7, 'up');
+        this.circle4 = new Circle(this, 400, 200, 20, 'black', 7, 'down');
+        this.circle5 = new Circle(this, 500, 200, 20, 'black', 7, 'up');
+        this.circle6 = new Circle(this, 600, 200, 20, 'black', 7, 'down');
+        this.circle7 = new Circle(this, 700, 200, 20, 'black', 7, 'up');
+        this.coin = new Circle(this, 400, 210, 5, 'yellow', 0)
         const controls = new Controls(this);
         controls.keyboardEvents();
     
@@ -39,19 +39,28 @@ class Game {
 
     startLvl2() {
         this.cube = new Component(this, 30, 30, 'red', 0, 180);
-        this.circle1 = new Circle(this, 100, 200, 30, 'yellow', 10, 'up');
-        this.circle2 = new Circle(this, 200, 200, 30, 'yellow', 10, 'down');
-        this.circle3 = new Circle(this, 300, 200, 30, 'yellow', 10, 'up');
-        this.circle4 = new Circle(this, 400, 200, 30, 'yellow', 10, 'down');
-        this.circle5 = new Circle(this, 500, 200, 30, 'yellow', 10, 'up');
-        this.circle6 = new Circle(this, 600, 200, 30, 'yellow', 10, 'down');
-        this.circle7 = new Circle(this, 700, 200, 30, 'yellow', 10, 'up');
-        this.coin = new Circle(this, 400, 400, 5, 'black', 0);
+        //this.circle1 = new CircleRound(this, 0, 0, 20, 'yellow', 1, 'round', 0, 100);
+        this.circle1 = new Circle(this, 700, 200, 20, 'black', 7, 'up');
+        this.circle2 = new CircleRound(this, 0, 0, 20, 'black', 1, 'round', 80, 100);
+        this.circle3 = new CircleRound(this, 0, 0, 20, 'black', 1, 'round', -80, 100);
+        this.circle4 = new CircleRound(this, 0, 0, 20, 'black', 1, 'round', 140, 100);
+        this.circle5 = new CircleRound(this, 0, 0, 20, 'black', 1, 'round', -140, 100);
+        this.circle6 = new CircleRound(this, 0, 0, 20, 'black', 1, 'round', 200, 100);
+        this.circle7 = new CircleRound(this, 0, 0, 20, 'black', 1, 'round', -200, 100);
+        this.circle8 = new CircleRound(this, 0, 0, 20, 'black', 1, 'round', 200, 100);
+
+        this.coin = new Circle(this, 400, 300, 5, 'yellow', 0);
         const controls = new Controls(this);
         controls.keyboardEvents();
 
         this.obstacles.push (this.circle1, this.circle2, this.circle3, this.circle4, this.circle5, this.circle6, this.circle7);
         this.coins.push (this.coin);
+
+        this.intervalId = setInterval(() => {
+            this.update();
+          }, 1000 / 60);
+
+       
     }
     
 
@@ -65,7 +74,7 @@ class Game {
         this.circle4.draw();
         this.circle5.draw();
         this.circle6.draw();
-        this.circle7.draw()
+        this.circle7.draw();
         this.circle1.circleDir();       
         this.circle2.circleDir();
         this.circle3.circleDir();
@@ -73,7 +82,7 @@ class Game {
         this.circle5.circleDir();
         this.circle6.circleDir();
         this.circle7.circleDir();
-        if (this.coin) this.coin.draw();
+        if (this.coins[0]) this.coins[0].draw();
         this.checkGameOver();
         this.checkCoinCollect();
         this.drawScore();
@@ -83,9 +92,9 @@ class Game {
 
     drawBackground() {
         if (this.level === 1) { 
-        this.background.src = "docs/assets/imgs/background2.png";
+        this.background.src = "/docs/assets/imgs/backgroundFundo.png.jpg";
         }else if (this.level === 2) {
-            this.background.src = "docs/assets/imgs/background3.png";
+            this.background.src = "/docs/assets/imgs/backgroundFundo.png.jpg";
         }
         this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
         this.ctx.fillStyle = '#ffbb00';
@@ -112,9 +121,9 @@ class Game {
         if (crashed) { 
           this.stop();
           this.clear();
-          if (this.level = 1){
+          if (this.level === 1){
           this.start();
-          }else if (this.level = 2){
+          } else if (this.level === 2){
             this.startLvl2();
           }
         }
@@ -122,10 +131,8 @@ class Game {
       }
 
       levelPassed() {
-          if (this.coin == null && this.cube.right() >= this.canvasWidth - 20) {
+          if (!this.coins[0] && this.cube.right() >= this.canvasWidth - 20) {
               this.level = 2;
-              console.log('LEVEL PASSED');
-              console.log (this.level)
               this.startLvl2();
           }
       }
@@ -136,15 +143,15 @@ class Game {
               return cube.crashWith(coin);
           });
           if (collect) {
-          this.coin = null;
+          this.coins = [];
           }
       }
 
       drawScore() {
         let score = this.intervalId;
         this.ctx.font = '25px courier';
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillText(`Attempt: ${score}`, 2, 20);
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(`Attempt: ${score}`, 6, 20);
       }
 
 }

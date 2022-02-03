@@ -1,24 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
     padding: 0;
     text-align: center;
-    background: url(/docs/assets/imgs/plex-arcade-hero-synth-grid.png)no-repeat center center fixed; 
+    background: url(/docs/assets/imgs/plex-arcade-hero-synth-grid.png) no-repeat center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  }
-    
+    margin-top: 0;
 }
-  
-  
-  .game-intro {
-    float: right;
+
+p {
+    font-family: 'Press Start 2P';
+    font-size: 50px;
+    color: white;
+    margin-bottom: 0;
+    margin-top: 20px
+}
+
+.game-intro {
+    
     padding: 0% 10%;
+    display: flex;
+      justify-content: center;
+      align-items: center;
   }
   
   .game-intro p {
     font-size: 18px;
-    font-family: "Verdana"
+    font-family: "Press Start 2P";
   }
   
   .logo-img {
@@ -30,17 +41,26 @@ body {
   }
   
   body button {
-    font-size: 30px;
+      
+    font-size: 20px;
     background-color: #9830dd;
     color: #fff;
     padding: 5px 40px;
     border: 0;
     box-shadow: 0;
-    font-family:'Courier New', Courier, monospace
+    font-family:'Press Start 2P', Courier, monospace;
     
   }
   
   #game-board {
       float: center;
       padding: 20px 0px;
+
+  }
+
+  #start-button {
+    display: flex;
+      justify-content: center;
+      align-items: center; 
+      margin-right: 200px;; 
   }
