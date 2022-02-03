@@ -92,9 +92,9 @@ class Game {
 
     drawBackground() {
         if (this.level === 1) { 
-        this.background.src = "/docs/assets/imgs/backgroundFundo.png.jpg";
+        this.background.src = "./docs/assets/imgs/backgroundFundo.png.jpg";
         }else if (this.level === 2) {
-            this.background.src = "/docs/assets/imgs/backgroundFundo.png.jpg";
+            this.background.src = "./docs/assets/imgs/backgroundFundo.png.jpg";
         }
         this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
         this.ctx.fillStyle = '#ffbb00';

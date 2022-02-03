@@ -3,7 +3,7 @@
 body {
     padding: 0;
     text-align: center;
-    background: url(/docs/assets/imgs/plex-arcade-hero-synth-grid.png) no-repeat center fixed; 
+    background: url(./docs/assets/imgs/plex-arcade-hero-synth-grid.png) no-repeat center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
